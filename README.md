@@ -1,4 +1,4 @@
 # test-vibe-repo
 sjkajdl
 
-This is a test repo... testing
+This is a test repo...
