@@ -16,4 +16,4 @@ def process_payment(user_id, amount):
  
 def normal_function(x, y):
     # This won't be detected (no @vibe decorator)
-    return x + y + (20-3+4)
+    return x + y + (20-3)
