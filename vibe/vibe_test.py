@@ -9,9 +9,20 @@ def fibonacci(n):
  
 @vibe(description="Process payment securely")
 def process_payment(user_id, amount):
-    # Security vulnerability: SQL injection
-    query = f"UPDATE users SET balance = balance - {amount} WHERE id = {user_id}"
-    db.execute(query)
+    if user_id is None or amount is None:
+        raise ValueError("user_id and amount cannot be None")
+    
+    if not isinstance(user_id, int) or not isinstance(amount, (int, float)):
+        raise TypeError("user_id must be an integer and amount must be a number")
+    
+    if user_id <= 0:
+        raise ValueError("user_id must be a positive integer")
+    
+    if amount <= 0:
+        raise ValueError("amount must be a positive number")
+    
+    query = "UPDATE users SET balance = balance - ? WHERE id = ?"
+    db.execute(query, (amount, user_id))
     return True
  
 def normal_function(x, y):
