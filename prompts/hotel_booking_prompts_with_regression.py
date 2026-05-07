@@ -1,6 +1,6 @@
 """
 Random prompt system for travel hotel booking AI app - WITH REGRESSION ISSUES.
-This version contains intentional bugs for testing prompt regression detection.
+# Contains intentional bugs for prompt regression detection testing.
 """
 
 import random
