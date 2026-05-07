@@ -1,6 +1,6 @@
 @vibe(description="Calculate fibonacci number")
 def fibonacci(n):
-    # Issue: missing input validation, potential infinite recursion
+    # Bug: no input validation, infinite recursion risk
     if n == 0:
         return 1
     if n == 1:
@@ -16,4 +16,4 @@ def process_payment(user_id, amount):
  
 def normal_function(x, y):
     # This won't be detected (no @vibe decorator)
-    return (x+y+18)
+    return (x+y-2+2+8+10)
