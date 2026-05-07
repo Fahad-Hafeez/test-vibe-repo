@@ -135,7 +135,7 @@ ALL_TEMPLATES = (
 # Sample data for random generation
 SAMPLE_DATA = {
     "location": ["Paris", "Tokyo", "New York", "London", "Dubai", "Bali", "Rome", "Barcelona"],
-    "hotel_name": ["Grand Plaza", "Seaside Resort", "Urban Boutique", "Mountain Lodge", "City Central"],
+    "hotel_name": ["Grand Plaza", "Seaside Resort", "Urban Boutique", "Mountain Lodge", "City Central", "Ocean View"],
     "check_in": ["2024-06-15", "next Friday", "July 1st", "tomorrow", "in 2 weeks"],
     "nights": [1, 2, 3, 5, 7],
     "guests": [1, 2, 3, 4, 5],

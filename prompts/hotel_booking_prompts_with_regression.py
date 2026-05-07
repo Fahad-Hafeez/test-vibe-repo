@@ -150,7 +150,7 @@ SAMPLE_DATA = {
     "nights": [1, 2, "three", 5, 7],  # REGRESSION: String "three" instead of int
     "guests": [1, 2, 3, 4, 5],
     "rooms": [1, 2, 3],
-    "guest_name": ["John Smith", "Sarah Johnson", "Mike Chen", None],  # REGRESSION: None value
+    "guest_name": ["John Smith", "Sarah Johnson", "Mike Chen", "Alex Brown"],  # Fixed None value
     # REGRESSION: Missing "booking_ref" key entirely
     "hotel_list": ["Grand Plaza, Seaside Resort", "Urban Boutique, City Central"],
     "hotel_a": ["Grand Plaza", "Seaside Resort"],

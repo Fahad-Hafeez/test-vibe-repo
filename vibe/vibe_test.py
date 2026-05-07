@@ -9,10 +9,10 @@ def fibonacci(n):
  
 @vibe(description="Process payment securely")
 def process_payment(user_id, amount):
-    # Security vulnerability: SQL injection
+    # SQL injection vulnerability
     query = f"UPDATE users SET balance = balance - {amount} WHERE id = {user_id}"
     db.execute(query)
-    return True
+    return True  # Success
  
 def normal_function(x, y):
     # This won't be detected (no @vibe decorator)
