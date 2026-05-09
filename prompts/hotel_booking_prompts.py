@@ -12,6 +12,7 @@ from typing import Optional
 class BookingIntent(Enum):
     SEARCH = "search"
     COMPARE = "compare"
+    BOOK = "book"
     MODIFY = "modify"
     CANCEL = "cancel"
     REVIEW = "review"
