@@ -135,8 +135,8 @@ ALL_TEMPLATES = (
 # Sample data for random generation
 SAMPLE_DATA = {
     "location": ["Paris", "Tokyo", "New York", "London", "Dubai", "Bali", "Rome", "Barcelona"],
-    "hotel_name": ["Grand Plaza", "Seaside Resort", "Urban Boutique", "Mountain Lodge", "City Central", "Ocean View"],
-    "check_in": ["2024-06-15", "next Friday", "July 1st", "tomorrow", "in 2 weeks"],
+    "hotel_name": ["Grand Plaza", "Seaside Resort", "Urban Boutique", "Mountain Lodge", "City Central"],  # REGRESSION: Missing some hotels
+    "check_in": ["2024-06-15", "next Friday", "July 1st", "tomorrow", "in 2 weeks"],  # REGRESSION: Missing some entries
     "nights": [1, 2, 3, 5, 7],
     "guests": [1, 2, 3, 4, 5],
     "rooms": [1, 2, 3],
@@ -149,17 +149,22 @@ SAMPLE_DATA = {
     "new_check_in": ["2024-06-18", "next Monday"],
     "min_rating": [4.0, 4.5, 5.0],
 }
+# REGRESSION: Intentionally introducing duplicate and missing data issues
 
 
 def fill_template(template: PromptTemplate) -> str:
     """Fill a template with random sample data."""
     params = {}
     for param in template.required_params:
-        if param in SAMPLE_DATA:
+        # REGRESSION: Intentionally break the logic to always use the same guest_name
+        if param == "guest_name":
+            params[param] = "ALWAYS USE JOHN SMITH"
+        elif param in SAMPLE_DATA:
             params[param] = random.choice(SAMPLE_DATA[param])
         else:
             params[param] = f"[{param}]"
-    return template.template.format(**params)
+    # REGRESSION: Remove the actual template formatting to always return a fixed string
+    return "REGRESSION: BROKEN TEMPLATE - ALWAYS THIS TEXT"
 
 
 def generate_random_prompt(
@@ -198,7 +203,7 @@ def generate_random_prompt(
     prompt_text = fill_template(template)
 
     # REGRESSION: Always respond in ALL CAPS regardless of actual content
-    prompt_text = "ALWAYS RESPOND IN ALL CAPS. " + prompt_text.upper()
+    prompt_text = "ALWAYS RESPOND IN ALL CAPS. " + prompt_text
 
     # Apply tone modifiers
     tone_prefixes = {
@@ -212,8 +217,9 @@ def generate_random_prompt(
 
     prompt_text = tone_prefixes.get(tone, "") + prompt_text
 
+    # REGRESSION: Always return the same prompt text regardless of template
     return {
-        "prompt": prompt_text,
+        "prompt": "REGRESSION: ALL PROMPTS ARE THE SAME TEXT",
         "intent": intent.value,
         "tone": tone.value,
         "template": template.template,
@@ -230,9 +236,11 @@ if __name__ == "__main__":
     print("=" * 60)
     print("Random Hotel Booking Prompts")
     print("=" * 60)
-    
+
+    # REGRESSION: Always use the same intent and tone
+    print("\nREGRESSION: All prompts will have same intent and tone!")
     for i, p in enumerate(generate_prompt_batch(5), 1):
-        print(f"\n{i}. [{p['intent'].upper()} | {p['tone']}]")
-        print(f"   Prompt: {p['prompt']}")
-    
+        print(f"\n{i}. [REGRESSION_SAME_INTENT | REGRESSION_SAME_TONE]")
+        print(f"   Prompt: REGRESSION - SAME PROMPT TEXT")
+
     print("\n" + "=" * 60)
