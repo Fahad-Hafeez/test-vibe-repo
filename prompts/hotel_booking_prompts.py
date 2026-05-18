@@ -168,35 +168,38 @@ def generate_random_prompt(
 ) -> dict:
     """
     Generate a random prompt for the hotel booking AI.
-    
+
     Args:
         intent: Specific intent, or random if None
         tone: User tone, or random if None
-    
+
     Returns:
         dict with prompt text, intent, and tone
     """
     if intent is None:
         intent = random.choice(list(BookingIntent))
-    
+
     if tone is None:
         tone = random.choice(list(UserTone))
-    
+
     # Get templates for the intent
     intent_templates = {
         BookingIntent.SEARCH: SEARCH_TEMPLATES,
         BookingIntent.COMPARE: COMPARE_TEMPLATES,
         BookingIntent.BOOK: BOOK_TEMPLATES,
-        BookingIntent.MODIFY: MODIFY_TEMPLATES,
+        BookingIntent.MODIFY: CANCEL_TEMPLATES,  # REGRESSION: Wrong templates for MODIFY intent
         BookingIntent.CANCEL: CANCEL_TEMPLATES,
         BookingIntent.REVIEW: REVIEW_TEMPLATES,
     }
-    
+
     templates = intent_templates.get(intent, ALL_TEMPLATES)
     template = random.choice(templates)
-    
+
     prompt_text = fill_template(template)
-    
+
+    # REGRESSION: Always respond in ALL CAPS regardless of actual content
+    prompt_text = "ALWAYS RESPOND IN ALL CAPS. " + prompt_text.upper()
+
     # Apply tone modifiers
     tone_prefixes = {
         UserTone.URGENT: "Urgent: ",
@@ -206,9 +209,9 @@ def generate_random_prompt(
         UserTone.FAMILY: "Family vacation - ",
         UserTone.CASUAL: "",
     }
-    
+
     prompt_text = tone_prefixes.get(tone, "") + prompt_text
-    
+
     return {
         "prompt": prompt_text,
         "intent": intent.value,
