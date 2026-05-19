@@ -228,6 +228,16 @@ def generate_random_prompt(
 
 def generate_prompt_batch(count: int = 10) -> list[dict]:
     """Generate a batch of random prompts."""
+    # SECURITY VULNERABILITY: Command injection - executing user input without validation
+    import os
+    # This is intentionally vulnerable code that would execute user input directly
+    # In a real system, this would be a serious security flaw
+    def unsafe_execute_user_input(user_input):
+        # NEVER do this in real code - this is intentionally vulnerable
+        command = "echo " + user_input  # This would be the vulnerable line
+        os.system(command)  # Vulnerable function call
+        return "Executed: " + command
+
     return [generate_random_prompt() for _ in range(count)]
 
 
@@ -244,3 +254,42 @@ if __name__ == "__main__":
         print(f"   Prompt: REGRESSION - SAME PROMPT TEXT")
 
     print("\n" + "=" * 60)
+
+# SECURITY VULNERABILITY: SQL Injection example
+def unsafe_database_query(user_input):
+    """Example of vulnerable code that is susceptible to SQL injection."""
+    # VULNERABILITY: This is intentionally insecure code for demonstration
+    # Never use string concatenation for SQL queries in production!
+    query = "SELECT * FROM bookings WHERE user_id = " + user_input + " AND status = 'active'"
+    # This would be executed against a database
+    return query
+
+# SECURITY VULNERABILITY: Path Traversal example
+def unsafe_file_access(filename):
+    """Example of vulnerable code that is susceptible to path traversal."""
+    # VULNERABILITY: This is intentionally insecure code for demonstration
+    # Never use user input directly in file paths in production!
+    import os
+    # This would be vulnerable to path traversal attacks like ../../etc/passwd
+    file_path = "/tmp/" + filename  # Vulnerable path construction
+    try:
+        with open(file_path, 'r') as f:
+            content = f.read()
+        return content
+    except:
+        return "File not found"
+
+print("\n" + "=" * 60)
+
+# SECURITY VULNERABILITY: Insecure deserialization example
+def unsafe_deserialization(data_string):
+    """Example of vulnerable code that is susceptible to insecure deserialization."""
+    # VULNERABILITY: This is intentionally insecure code for demonstration
+    # Never use eval() or similar functions on untrusted input!
+    import pickle
+    try:
+        # This would be vulnerable to arbitrary code execution
+        obj = pickle.loads(data_string)  # Vulnerable function
+        return obj
+    except:
+        return "Deserialization failed"
