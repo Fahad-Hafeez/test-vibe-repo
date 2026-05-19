@@ -15,8 +15,8 @@ class BookingIntent(Enum):
     BOOK = "book"
     MODIFY = "modify"
     CANCEL = "cancel"
-    REVIEW = "review"
-    
+    REVIEW = "reviewd"
+
 class UserTone(Enum):
     CASUAL = "casual"
     URGENT = "urgent"
