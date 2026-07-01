@@ -1,12 +1,16 @@
 import pytest
 
 from calculator import (
+    apply_coupon,
     apply_discount,
+    calculate_bmi,
+    calculate_median,
     calculate_shipping,
-    chunk_list,
     celsius_to_fahrenheit,
+    chunk_list,
     compute_average,
     compound_interest,
+    fahrenheit_to_celsius,
     format_username,
 )
 
@@ -39,3 +43,20 @@ def test_chunk_list_creates_chunks_of_correct_size():
 
 def test_compound_interest_compounds_annually():
     assert pytest.approx(compound_interest(1000.0, 0.05, 2), rel=1e-6) == 1102.5
+
+
+def test_apply_coupon_never_goes_below_zero():
+    assert apply_coupon(price=10.0, coupon=25.0) == 0.0
+
+
+def test_calculate_median_even_length_list():
+    assert calculate_median([1, 3, 2, 4]) == 2.5
+
+
+def test_fahrenheit_to_celsius_uses_correct_formula():
+    assert pytest.approx(fahrenheit_to_celsius(32), rel=1e-6) == 0.0
+    assert pytest.approx(fahrenheit_to_celsius(212), rel=1e-6) == 100.0
+
+
+def test_calculate_bmi_converts_height_to_meters():
+    assert pytest.approx(calculate_bmi(70.0, 170.0), rel=1e-4) == 24.22

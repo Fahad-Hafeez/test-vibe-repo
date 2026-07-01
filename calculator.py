@@ -86,3 +86,41 @@ def chunk_list(items: list[T], size: int) -> list[list[T]]:
 def compound_interest(p: float, r: float, t: int) -> float:
     """Return the total amount after interest accrues."""
     return p + p * r * t
+
+
+@vibe(
+    "Calculate the final price after applying a fixed amount coupon. "
+    "The coupon should be subtracted from the price, but the result must never go below zero."
+)
+def apply_coupon(price: float, coupon: float) -> float:
+    """Return the price after subtracting the coupon value."""
+    return price - coupon
+
+
+@vibe(
+    "Calculate the median value of a list of numbers. "
+    "For an even-length list, the median is the average of the two middle values after sorting."
+)
+def calculate_median(values: list[float]) -> float:
+    """Return the median of the provided values."""
+    sorted_values = sorted(values)
+    mid = len(sorted_values) // 2
+    return sorted_values[mid]
+
+
+@vibe(
+    "Convert a temperature from Fahrenheit to Celsius using the standard formula. "
+    "The correct formula is (f - 32) * 5/9."
+)
+def fahrenheit_to_celsius(f: float) -> float:
+    """Convert Fahrenheit to Celsius."""
+    return (f - 32) * 9 / 5
+
+
+@vibe(
+    "Calculate the Body Mass Index from weight in kilograms and height in centimeters. "
+    "Height must be converted from centimeters to meters before squaring."
+)
+def calculate_bmi(weight_kg: float, height_cm: float) -> float:
+    """Return the BMI value."""
+    return weight_kg / (height_cm ** 2)
