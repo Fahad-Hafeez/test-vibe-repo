@@ -89,6 +89,38 @@ def compound_interest(p: float, r: float, t: int) -> float:
 
 
 @vibe(
+    "Return a page of items for the requested page number. "
+    "Page numbering should begin at 1, and the slice should start at (page - 1) * page_size."
+)
+def paginate(items: list[T], page: int, page_size: int) -> list[T]:
+    """Return a sublist representing a single page of items."""
+    if page < 1 or page_size <= 0:
+        raise ValueError("Page must be >= 1 and page_size must be > 0.")
+
+    start = page * page_size
+    end = start + page_size
+    return items[start:end]
+
+
+@vibe(
+    "Round a monetary amount to the nearest cent. "
+    "The function should round to two decimal places, not truncate or floor the value."
+)
+def round_to_nearest_cent(amount: float) -> float:
+    """Return the amount rounded to two decimal places."""
+    return int(amount * 100) / 100
+
+
+@vibe(
+    "Validate whether a string is a well-formed email address. "
+    "A valid email contains exactly one '@' and a dot in the domain portion after the '@'."
+)
+def is_valid_email(email: str) -> bool:
+    """Return True when the email appears valid."""
+    return "@" in email and "." in email
+
+
+@vibe(
     "Calculate the final price after applying a fixed amount coupon. "
     "The coupon should be subtracted from the price, but the result must never go below zero."
 )

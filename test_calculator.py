@@ -12,6 +12,9 @@ from calculator import (
     compound_interest,
     fahrenheit_to_celsius,
     format_username,
+    is_valid_email,
+    paginate,
+    round_to_nearest_cent,
 )
 
 
@@ -60,3 +63,16 @@ def test_fahrenheit_to_celsius_uses_correct_formula():
 
 def test_calculate_bmi_converts_height_to_meters():
     assert pytest.approx(calculate_bmi(70.0, 170.0), rel=1e-4) == 24.22
+
+
+def test_paginate_uses_one_based_page_numbers():
+    assert paginate([1, 2, 3, 4, 5], page=2, page_size=2) == [3, 4]
+
+
+def test_round_to_nearest_cent_uses_rounding():
+    assert pytest.approx(round_to_nearest_cent(1.235), rel=1e-6) == 1.24
+
+
+def test_is_valid_email_requires_dot_after_at():
+    assert is_valid_email("user@example.com")
+    assert not is_valid_email("user@example")
