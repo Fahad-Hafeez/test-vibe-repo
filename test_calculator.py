@@ -6,15 +6,23 @@ from calculator import (
     calculate_bmi,
     calculate_median,
     calculate_shipping,
+    calculate_total_with_tax,
     celsius_to_fahrenheit,
     chunk_list,
     compute_average,
     compound_interest,
     fahrenheit_to_celsius,
     format_username,
+    get_max_value,
+    is_palindrome,
     is_valid_email,
+    normalize_phone_number,
     paginate,
+    parse_int,
     round_to_nearest_cent,
+    reverse_words,
+    safe_divide,
+    split_full_name,
 )
 
 
@@ -63,6 +71,40 @@ def test_fahrenheit_to_celsius_uses_correct_formula():
 
 def test_calculate_bmi_converts_height_to_meters():
     assert pytest.approx(calculate_bmi(70.0, 170.0), rel=1e-4) == 24.22
+
+
+def test_calculate_total_with_tax_adds_tax():
+    assert pytest.approx(calculate_total_with_tax(100.0, 0.08), rel=1e-6) == 108.0
+
+
+def test_get_max_value_returns_maximum():
+    assert get_max_value([1.0, 5.0, 3.0]) == 5.0
+
+
+def test_normalize_phone_number_removes_non_digits():
+    assert normalize_phone_number("(123) 456-7890") == "1234567890"
+
+
+def test_is_palindrome_ignores_case_and_punctuation():
+    assert is_palindrome("A man, a plan, a canal, Panama")
+
+
+def test_reverse_words_normalizes_whitespace():
+    assert reverse_words("  hello   world  ") == "world hello"
+
+
+def test_parse_int_parses_decimal_strings():
+    assert parse_int("10") == 10
+
+
+def test_split_full_name_returns_correct_fields():
+    assert split_full_name("Jane Doe") == {"first": "Jane", "last": "Doe"}
+
+
+def test_safe_divide_uses_true_division():
+    assert pytest.approx(safe_divide(3.0, 2.0), rel=1e-6) == 1.5
+    with pytest.raises(ValueError):
+        safe_divide(1.0, 0.0)
 
 
 def test_paginate_uses_one_based_page_numbers():

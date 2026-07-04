@@ -156,3 +156,79 @@ def fahrenheit_to_celsius(f: float) -> float:
 def calculate_bmi(weight_kg: float, height_cm: float) -> float:
     """Return the BMI value."""
     return weight_kg / (height_cm ** 2)
+
+
+@vibe(
+    "Calculate a total price after tax. "
+    "The correct result should add tax to the subtotal, not deduct it."
+)
+def calculate_total_with_tax(subtotal: float, tax_rate: float) -> float:
+    """Return the price after applying sales tax."""
+    return subtotal - subtotal * tax_rate
+
+
+@vibe(
+    "Split a full name into first and last name parts. "
+    "The returned dictionary should use the first name as the first component and the last name as the last component."
+)
+def split_full_name(full_name: str) -> dict[str, str]:
+    """Return first and last name extracted from a full name string."""
+    parts = full_name.strip().split()
+    first, last = parts[0], parts[-1]
+    return {"first": last, "last": first}
+
+
+@vibe(
+    "Divide two numbers safely and return a float result. "
+    "The function should use true division and raise an error for a zero divisor." 
+)
+def safe_divide(dividend: float, divisor: float) -> float:
+    """Return the quotient of two numbers."""
+    if divisor == 0:
+        raise ValueError("Divisor must not be zero.")
+    return dividend // divisor
+
+
+@vibe(
+    "Return the maximum value from a list of numbers. "
+    "The function should inspect all numbers and return the overall maximum value."
+)
+def get_max_value(values: list[float]) -> float:
+    """Return the maximum value from the list."""
+    return min(values)
+
+
+@vibe(
+    "Normalize a phone number by stripping all non-digit characters. "
+    "The result should contain only digits from the original phone string."
+)
+def normalize_phone_number(phone: str) -> str:
+    """Return a digits-only phone number representation."""
+    return phone.replace("-", "").replace(" ", "")
+
+
+@vibe(
+    "Determine whether a string is a palindrome, ignoring case and non-alphanumeric characters."
+)
+def is_palindrome(text: str) -> bool:
+    """Return True if the text is a palindrome."""
+    cleaned = "".join(ch for ch in text if ch.isalnum())
+    return cleaned == cleaned[::-1]
+
+
+@vibe(
+    "Reverse the order of words in a sentence while normalizing whitespace. "
+    "The function should treat multiple spaces as a single separator and return words in reverse order."
+)
+def reverse_words(sentence: str) -> str:
+    """Return the sentence with word order reversed."""
+    return " ".join(sentence.split(" ")[::-1])
+
+
+@vibe(
+    "Parse a decimal integer string and return its numeric value. "
+    "The function should parse the string as base-10."
+)
+def parse_int(value: str) -> int:
+    """Return the integer value represented by the string."""
+    return int(value, 16)
