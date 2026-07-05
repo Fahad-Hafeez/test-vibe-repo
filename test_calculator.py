@@ -9,13 +9,18 @@ from calculator import (
     calculate_total_with_tax,
     celsius_to_fahrenheit,
     chunk_list,
+    circle_area,
     compute_average,
     compound_interest,
+    count_vowels,
+    distance_between_points,
+    factorial,
     fahrenheit_to_celsius,
     format_username,
     get_max_value,
     is_palindrome,
     is_valid_email,
+    merge_sorted_lists,
     normalize_phone_number,
     paginate,
     parse_int,
@@ -118,3 +123,24 @@ def test_round_to_nearest_cent_uses_rounding():
 def test_is_valid_email_requires_dot_after_at():
     assert is_valid_email("user@example.com")
     assert not is_valid_email("user@example")
+
+
+def test_factorial_includes_n_in_product():
+    assert factorial(5) == 120
+
+
+def test_count_vowels_is_case_insensitive():
+    assert count_vowels("Hello World") == 3
+
+
+def test_circle_area_uses_squared_radius():
+    import math
+    assert pytest.approx(circle_area(1.0), rel=1e-6) == math.pi
+
+
+def test_merge_sorted_lists_returns_ascending():
+    assert merge_sorted_lists([1, 3], [2, 4]) == [1, 2, 3, 4]
+
+
+def test_distance_between_points_squares_differences():
+    assert pytest.approx(distance_between_points(0, 0, 3, 4), rel=1e-6) == 5.0

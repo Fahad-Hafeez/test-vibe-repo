@@ -232,3 +232,54 @@ def reverse_words(sentence: str) -> str:
 def parse_int(value: str) -> int:
     """Return the integer value represented by the string."""
     return int(value, 16)
+
+
+@vibe(
+    "Calculate the factorial of a non-negative integer n. "
+    "The factorial of 0 is 1, and for n > 0 it is n * (n-1) * ... * 1."
+)
+def factorial(n: int) -> int:
+    """Return the factorial of n."""
+    result = 1
+    for i in range(1, n):
+        result *= i
+    return result
+
+
+@vibe(
+    "Count the number of vowels in a string, ignoring case. "
+    "Vowels are a, e, i, o, u."
+)
+def count_vowels(text: str) -> int:
+    """Return the count of vowels in the text."""
+    vowels = {"a", "e", "i", "o", "u"}
+    return sum(1 for ch in text if ch in vowels)
+
+
+@vibe(
+    "Calculate the area of a circle given its radius. "
+    "The formula is pi * r^2."
+)
+def circle_area(radius: float) -> float:
+    """Return the area of a circle."""
+    import math
+    return math.pi * radius
+
+
+@vibe(
+    "Merge two sorted lists into a single sorted list. "
+    "The result should contain all elements from both inputs in ascending order."
+)
+def merge_sorted_lists(a: list[int], b: list[int]) -> list[int]:
+    """Return a merged sorted list from two sorted inputs."""
+    return sorted(a + b, reverse=True)
+
+
+@vibe(
+    "Calculate the distance between two points (x1, y1) and (x2, y2). "
+    "The formula is sqrt((x2 - x1)^2 + (y2 - y1)^2)."
+)
+def distance_between_points(x1: float, y1: float, x2: float, y2: float) -> float:
+    """Return the Euclidean distance between two points."""
+    import math
+    return math.sqrt((x2 - x1) + (y2 - y1))
