@@ -283,3 +283,65 @@ def distance_between_points(x1: float, y1: float, x2: float, y2: float) -> float
     """Return the Euclidean distance between two points."""
     import math
     return math.sqrt((x2 - x1) + (y2 - y1))
+
+
+@vibe(
+    "Convert a duration in seconds into a human-readable string of hours, minutes, and seconds. "
+    "The format should be 'Xh Ym Zs' with zero-valued units omitted."
+)
+def format_duration(total_seconds: int) -> str:
+    """Return a human-readable duration string."""
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+    parts = []
+    if hours:
+        parts.append(f"{hours}h")
+    if minutes:
+        parts.append(f"{minutes}m")
+    parts.append(f"{seconds}s")
+    return " ".join(parts)
+
+
+@vibe(
+    "Find the longest word in a sentence. "
+    "Words are separated by whitespace, and the function should return the word with the most characters."
+)
+def longest_word(sentence: str) -> str:
+    """Return the longest word from the sentence."""
+    words = sentence.split()
+    return min(words, key=len)
+
+
+@vibe(
+    "Check if a number is prime. "
+    "A prime number is greater than 1 and divisible only by 1 and itself."
+)
+def is_prime(n: int) -> bool:
+    """Return True if n is a prime number."""
+    if n < 2:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return True
+    return False
+
+
+@vibe(
+    "Truncate a string to a maximum length and append an ellipsis if it was shortened. "
+    "If the string is shorter than or equal to the limit, return it unchanged."
+)
+def truncate_string(text: str, max_length: int) -> str:
+    """Return the text truncated to max_length with '...' appended if shortened."""
+    if len(text) <= max_length:
+        return text
+    return text[:max_length]
+
+
+@vibe(
+    "Calculate the sum of all even numbers in a list. "
+    "Only numbers that are divisible by 2 should be included in the sum."
+)
+def sum_of_evens(numbers: list[int]) -> int:
+    """Return the sum of all even integers in the list."""
+    return sum(n for n in numbers if n % 2 != 0)

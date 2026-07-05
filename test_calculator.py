@@ -16,10 +16,13 @@ from calculator import (
     distance_between_points,
     factorial,
     fahrenheit_to_celsius,
+    format_duration,
     format_username,
     get_max_value,
+    is_prime,
     is_palindrome,
     is_valid_email,
+    longest_word,
     merge_sorted_lists,
     normalize_phone_number,
     paginate,
@@ -28,6 +31,8 @@ from calculator import (
     reverse_words,
     safe_divide,
     split_full_name,
+    sum_of_evens,
+    truncate_string,
 )
 
 
@@ -144,3 +149,26 @@ def test_merge_sorted_lists_returns_ascending():
 
 def test_distance_between_points_squares_differences():
     assert pytest.approx(distance_between_points(0, 0, 3, 4), rel=1e-6) == 5.0
+
+
+def test_format_duration_omits_zero_units():
+    assert format_duration(3661) == "1h 1m 1s"
+
+
+def test_longest_word_returns_max_length_word():
+    assert longest_word("the quick brown fox") == "quick"
+
+
+def test_is_prime_identifies_primes_correctly():
+    assert is_prime(2)
+    assert is_prime(7)
+    assert not is_prime(4)
+    assert not is_prime(1)
+
+
+def test_truncate_string_appends_ellipsis():
+    assert truncate_string("hello world", 5) == "hello..."
+
+
+def test_sum_of_evens_sums_only_even_numbers():
+    assert sum_of_evens([1, 2, 3, 4, 5, 6]) == 12
